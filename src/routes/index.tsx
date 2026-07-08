@@ -23,6 +23,7 @@ import {
   Boxes,
   FileCode2,
 } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
