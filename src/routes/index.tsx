@@ -541,7 +541,7 @@ function Section({
   return (
     <section id={id} className="py-20 md:py-28 scroll-mt-20">
       <div className="section-container">
-        <div className="max-w-2xl mb-12">
+        <Reveal direction="up" className="max-w-2xl mb-12">
           <div className="font-mono text-xs uppercase tracking-widest text-primary mb-3">
             // {eyebrow}
           </div>
@@ -551,7 +551,7 @@ function Section({
           {subtitle && (
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">{subtitle}</p>
           )}
-        </div>
+        </Reveal>
         {children}
       </div>
     </section>
