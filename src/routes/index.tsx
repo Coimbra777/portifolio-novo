@@ -237,7 +237,12 @@ function Portfolio() {
 
           {/* Hero code card */}
           <div className="relative animate-fade-up" style={{ animationDelay: "150ms" }}>
-            <div className="glass-card rounded-2xl p-6 relative overflow-hidden">
+            <div className="glass-card rounded-2xl p-6 relative overflow-hidden hover-tilt animate-float">
+              <div
+                className="pointer-events-none absolute inset-0 opacity-40"
+                style={{ background: "var(--gradient-hero)" }}
+              />
+              <div className="relative">
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-3 w-3 rounded-full bg-destructive/70" />
                 <span className="h-3 w-3 rounded-full bg-yellow-500/70" />
