@@ -97,7 +97,7 @@ src/
 3. **Sobre** — apresentação profissional resumida.
 4. **Serviços** — o que é oferecido (APIs, sistemas sob medida, integrações, automação, consultoria, manutenção).
 5. **Tecnologias** — stack técnica organizada por categoria.
-6. **Projetos & Cases** — cases com problema, solução, descrição, destaques técnicos e tecnologias usadas.
+6. **Projetos & Cases** — repositórios reais do GitHub, com categoria, problema, solução, descrição, destaques técnicos, tecnologias e status.
 7. **Como posso ajudar** — perguntas que endereçam dores comuns de negócio.
 8. **Processo** — etapas do fluxo de trabalho (diagnóstico → entrega).
 9. **Diferenciais** — motivos para contratar.
@@ -125,22 +125,37 @@ As mensagens pré-preenchidas dos botões de WhatsApp ficam em `whatsappMessages
 
 ### Projetos/cases
 
-Edite **`src/data/projects.ts`**. Cada projeto segue a interface:
+A seção "Projetos & Cases" exibe estes repositórios reais (nessa ordem, do mais forte tecnicamente ao mais simples):
+
+1. [Analisador de Risco](https://github.com/Coimbra777/Analisador-de-Risco) — TypeScript, Vue, NestJS, Docker
+2. [LaBella](https://github.com/Coimbra777/Labella_Site) — React, Laravel, Filament, MySQL, Redis, Docker
+3. [Conta Certa](https://github.com/Coimbra777/conta-certa) — Laravel, PHP, TypeScript, MySQL, Docker
+4. [DinDin](https://github.com/Coimbra777/DinDin) — Laravel, PHP, Docker, PHPUnit, Vite
+5. [ChatBot com NodeJS](https://github.com/Coimbra777/ChatBot-com-NodeJS) — Node.js, JavaScript
+6. [X3Solutions Website](https://github.com/Coimbra777/X3Solutions-website) — HTML, CSS, SCSS, JavaScript
+
+Edite **`src/data/projects.ts`** para adicionar, remover ou reordenar projetos. Cada projeto segue a interface:
 
 ```ts
 interface Project {
   name: string;
-  problem: string;       // dor/contexto do cliente
+  category: string;       // ex.: "Sistema fullstack / análise documental" — vira badge no card
+  problem: string;        // dor/contexto do cliente
   solution: string;       // resumo da solução entregue
   description: string;    // descrição técnica mais completa
   techs: string[];
-  githubUrl: string;      // deixe "" se o repositório for privado
+  githubUrl: string;      // link do repositório
   demoUrl: string;        // deixe "" se não houver demo pública
   highlights: string[];   // pontos técnicos de destaque (sem métricas inventadas)
+  status?: "Concluído" | "Em evolução" | "Estudo técnico" | "MVP"; // badge opcional no card
+  type?: "Projeto real" | "Estudo técnico" | "Projeto autoral" | "Landing page";
 }
 ```
 
-Se `githubUrl`/`demoUrl` estiverem vazios, os respectivos botões não são exibidos — apenas o CTA de WhatsApp ("Conversar sobre projeto parecido") aparece.
+- **GitHub/demo**: `githubUrl` sempre gera o botão "Ver repositório". `demoUrl` só gera o botão "Ver demo" se for preenchido — deixe `""` para omiti-lo.
+- **Destaque/ordem**: os cards são renderizados na mesma ordem do array `projects` — coloque os projetos mais relevantes no início do array para que apareçam primeiro na seção.
+- **Ícone do card**: escolhido automaticamente a partir de palavras-chave em `category` (função `getProjectIcon` em `ProjectsSection.tsx`); ajuste esse mapeamento se adicionar uma categoria muito diferente das existentes.
+- Não adicione métricas não comprováveis (números de usuários, "% de melhoria", "em produção", "cliente real") — use `highlights` para pontos técnicos concretos.
 
 ### Demais seções
 
@@ -179,4 +194,4 @@ O projeto não depende de nenhuma variável de ambiente/secret para funcionar (o
 - [ ] `npm run build` roda sem erros localmente
 - [ ] `npm run start` sobe o servidor localmente a partir do build (`.output/server/index.mjs`)
 - [ ] `profile.ts` revisado com dados reais (WhatsApp, LinkedIn, GitHub, e-mail, localização)
-- [ ] `src/data/projects.ts` revisado com links reais de repositório/demo
+- [ ] `src/data/projects.ts` revisado — `demoUrl` preenchido para os projetos que tiverem demo pública
