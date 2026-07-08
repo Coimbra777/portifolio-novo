@@ -204,18 +204,18 @@ function Portfolio() {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05]">
               Desenvolvimento de{" "}
-              <span className="gradient-text">sistemas, APIs e automações</span>{" "}
+              <span className="gradient-text-animated">sistemas, APIs e automações</span>{" "}
               para empresas que precisam ganhar eficiência.
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
               Ajudo empresas, startups e profissionais a transformarem processos manuais em soluções digitais escaláveis, integradas e seguras.
             </p>
             <p className="mt-4 font-mono text-sm text-primary">
-              Backend · Fullstack · APIs · Integrações · Automação
+              Backend · Fullstack · APIs · Integrações · Automação<span className="caret-blink ml-0.5">▍</span>
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#contato" className="btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold">
-                Solicitar orçamento <ArrowRight className="h-4 w-4" />
+              <a href="#contato" className="btn-primary group inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold">
+                Solicitar orçamento <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
               <a href="#projetos" className="btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold">
                 Ver projetos
