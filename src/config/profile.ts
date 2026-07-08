@@ -22,7 +22,6 @@ export const profile = {
     "Desenvolvedor com foco em backend e soluções digitais orientadas a resultado. Atuo criando APIs, integrações entre sistemas e automações que ajudam empresas a reduzir trabalho operacional e escalar processos com tecnologia.",
 
   logoLabel: "gabriel.dev",
-  siteVersion: "v1.0.0",
 } as const;
 
 /** Monta a URL do WhatsApp com uma mensagem pré-preenchida. */

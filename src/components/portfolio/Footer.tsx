@@ -1,4 +1,4 @@
-import { Github, GitBranch, Linkedin, Mail, MessageCircle, Terminal } from "lucide-react";
+import { Github, Linkedin, Mail, MessageCircle, Terminal } from "lucide-react";
 import { buildWhatsAppUrl, gmailComposeUrl, profile, whatsappMessages } from "@/config/profile";
 
 const socialLinkClassName =
@@ -43,14 +43,6 @@ export function Footer() {
             </a>
           ))}
         </div>
-      </div>
-      <div className="section-container mt-6 pt-6 border-t border-border text-xs text-muted-foreground flex flex-wrap justify-between gap-3">
-        <span>
-          © {new Date().getFullYear()} {profile.name}. Todos os direitos reservados.
-        </span>
-        <span className="font-mono flex items-center gap-1.5">
-          <GitBranch className="h-3 w-3" /> main · {profile.siteVersion}
-        </span>
       </div>
     </footer>
   );
