@@ -171,13 +171,13 @@ function Portfolio() {
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
             {nav.map((n) => (
-              <a key={n.href} href={n.href} className="hover:text-foreground transition-colors">
+              <a key={n.href} href={n.href} className="relative hover:text-foreground transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100">
                 {n.label}
               </a>
             ))}
           </nav>
-          <a href="#contato" className="btn-primary hidden sm:inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold">
-            Orçamento <ArrowRight className="h-4 w-4" />
+          <a href="#contato" className="btn-primary group hidden sm:inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold">
+            Orçamento <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </div>
       </header>
