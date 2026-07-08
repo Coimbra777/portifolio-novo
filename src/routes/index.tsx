@@ -272,6 +272,7 @@ export class OrdersController {
                   </span>
                 ))}
               </div>
+              </div>
             </div>
             <div
               className="absolute -inset-4 -z-10 rounded-3xl blur-3xl opacity-40"
