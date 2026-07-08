@@ -23,6 +23,7 @@ import {
   Boxes,
   FileCode2,
 } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -170,13 +171,13 @@ function Portfolio() {
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
             {nav.map((n) => (
-              <a key={n.href} href={n.href} className="hover:text-foreground transition-colors">
+              <a key={n.href} href={n.href} className="relative hover:text-foreground transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100">
                 {n.label}
               </a>
             ))}
           </nav>
-          <a href="#contato" className="btn-primary hidden sm:inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold">
-            Orçamento <ArrowRight className="h-4 w-4" />
+          <a href="#contato" className="btn-primary group hidden sm:inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold">
+            Orçamento <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </div>
       </header>
@@ -203,18 +204,18 @@ function Portfolio() {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05]">
               Desenvolvimento de{" "}
-              <span className="gradient-text">sistemas, APIs e automações</span>{" "}
+              <span className="gradient-text-animated">sistemas, APIs e automações</span>{" "}
               para empresas que precisam ganhar eficiência.
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
               Ajudo empresas, startups e profissionais a transformarem processos manuais em soluções digitais escaláveis, integradas e seguras.
             </p>
             <p className="mt-4 font-mono text-sm text-primary">
-              Backend · Fullstack · APIs · Integrações · Automação
+              Backend · Fullstack · APIs · Integrações · Automação<span className="caret-blink ml-0.5">▍</span>
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#contato" className="btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold">
-                Solicitar orçamento <ArrowRight className="h-4 w-4" />
+              <a href="#contato" className="btn-primary group inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold">
+                Solicitar orçamento <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
               <a href="#projetos" className="btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold">
                 Ver projetos
@@ -236,7 +237,12 @@ function Portfolio() {
 
           {/* Hero code card */}
           <div className="relative animate-fade-up" style={{ animationDelay: "150ms" }}>
-            <div className="glass-card rounded-2xl p-6 relative overflow-hidden">
+            <div className="glass-card rounded-2xl p-6 relative overflow-hidden hover-tilt animate-float">
+              <div
+                className="pointer-events-none absolute inset-0 opacity-40"
+                style={{ background: "var(--gradient-hero)" }}
+              />
+              <div className="relative">
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-3 w-3 rounded-full bg-destructive/70" />
                 <span className="h-3 w-3 rounded-full bg-yellow-500/70" />
@@ -265,6 +271,7 @@ export class OrdersController {
                     {t}
                   </span>
                 ))}
+              </div>
               </div>
             </div>
             <div
@@ -312,17 +319,16 @@ export class OrdersController {
       <Section id="servicos" eyebrow="Serviços" title={<>O que eu <span className="gradient-text">entrego</span></>}
         subtitle="Do diagnóstico à entrega: soluções técnicas sob medida para empresas e clientes que querem resultado.">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((s) => (
-            <div
-              key={s.title}
-              className="glass-card rounded-2xl p-6 group hover:border-primary/60 transition-all hover:-translate-y-1"
-            >
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl mb-4" style={{ background: "var(--gradient-primary)" }}>
-                <s.icon className="h-6 w-6 text-primary-foreground" />
-              </span>
-              <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-            </div>
+          {services.map((s, i) => (
+            <Reveal key={s.title} direction="up" delay={i * 80}>
+              <div className="glass-card rounded-2xl p-6 group hover-lift shimmer-border hover:border-primary/60 h-full">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl mb-4 icon-pop" style={{ background: "var(--gradient-primary)" }}>
+                  <s.icon className="h-6 w-6 text-primary-foreground" />
+                </span>
+                <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -331,22 +337,24 @@ export class OrdersController {
       <Section id="tech" eyebrow="Stack" title={<>Tecnologias que <span className="gradient-text">domino</span></>}
         subtitle="Ferramentas escolhidas pela robustez, ecossistema e adequação ao problema — não por moda.">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {techStack.map((t) => (
-            <div key={t.category} className="glass-card rounded-2xl p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-surface-elevated border border-border">
-                  <t.icon className="h-5 w-5 text-primary" />
-                </span>
-                <h3 className="font-semibold">{t.category}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {t.items.map((i) => (
-                  <span key={i} className="font-mono text-xs rounded-md border border-border bg-surface px-2.5 py-1 text-muted-foreground hover:text-primary hover:border-primary/60 transition-colors">
-                    {i}
+          {techStack.map((t, i) => (
+            <Reveal key={t.category} direction="up" delay={i * 70}>
+              <div className="glass-card rounded-2xl p-6 group hover-lift h-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-surface-elevated border border-border icon-pop">
+                    <t.icon className="h-5 w-5 text-primary" />
                   </span>
-                ))}
+                  <h3 className="font-semibold">{t.category}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {t.items.map((it) => (
+                    <span key={it} className="font-mono text-xs rounded-md border border-border bg-surface px-2.5 py-1 text-muted-foreground hover:text-primary hover:border-primary/60 hover:-translate-y-0.5 transition-all duration-200">
+                      {it}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -355,36 +363,38 @@ export class OrdersController {
       <Section id="projetos" eyebrow="Projetos & Cases" title={<>Trabalhos que resolvem <span className="gradient-text">problemas reais</span></>}
         subtitle="Uma amostra dos tipos de sistema, integração e arquitetura que já desenvolvi.">
         <div className="grid md:grid-cols-2 gap-5">
-          {projects.map((p) => (
-            <article key={p.name} className="glass-card rounded-2xl p-7 flex flex-col hover:border-primary/60 transition-all">
-              <div className="flex items-start gap-3 mb-3">
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg" style={{ background: "var(--gradient-primary)" }}>
-                  <Sparkles className="h-5 w-5 text-primary-foreground" />
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-semibold">{p.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    <span className="text-primary font-semibold">Problema: </span>{p.problem}
-                  </p>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.desc}</p>
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {p.tech.map((t) => (
-                  <span key={t} className="font-mono text-[11px] rounded-md border border-border bg-surface px-2 py-0.5 text-muted-foreground">
-                    {t}
+          {projects.map((p, i) => (
+            <Reveal key={p.name} direction={i % 2 === 0 ? "right" : "left"} delay={(i % 2) * 80}>
+              <article className="glass-card rounded-2xl p-7 flex flex-col group hover-lift shimmer-border hover:border-primary/60 h-full">
+                <div className="flex items-start gap-3 mb-3">
+                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg icon-pop" style={{ background: "var(--gradient-primary)" }}>
+                    <Sparkles className="h-5 w-5 text-primary-foreground" />
                   </span>
-                ))}
-              </div>
-              <div className="mt-auto flex flex-wrap gap-2">
-                <a href="#contato" className="btn-outline inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium">
-                  Ver detalhes <ArrowRight className="h-3 w-3" />
-                </a>
-                <a href="https://github.com/" target="_blank" rel="noreferrer" className="btn-outline inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium">
-                  <Github className="h-3 w-3" /> Ver código
-                </a>
-              </div>
-            </article>
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-semibold">{p.name}</h3>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      <span className="text-primary font-semibold">Problema: </span>{p.problem}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.desc}</p>
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {p.tech.map((t) => (
+                    <span key={t} className="font-mono text-[11px] rounded-md border border-border bg-surface px-2 py-0.5 text-muted-foreground">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-auto flex flex-wrap gap-2">
+                  <a href="#contato" className="btn-outline group/btn inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium">
+                    Ver detalhes <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                  </a>
+                  <a href="https://github.com/" target="_blank" rel="noreferrer" className="btn-outline inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium">
+                    <Github className="h-3 w-3" /> Ver código
+                  </a>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -392,32 +402,38 @@ export class OrdersController {
       {/* COMO POSSO AJUDAR */}
       <Section id="ajudar" eyebrow="Como posso ajudar" title={<>Problemas que eu <span className="gradient-text">transformo em solução</span></>}>
         <div className="grid md:grid-cols-2 gap-4 mb-10">
-          {painPoints.map((q) => (
-            <div key={q} className="glass-card rounded-xl p-5 flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 shrink-0 text-primary mt-0.5" />
-              <p className="text-sm md:text-base text-foreground/90">{q}</p>
-            </div>
+          {painPoints.map((q, i) => (
+            <Reveal key={q} direction="up" delay={i * 60}>
+              <div className="glass-card rounded-xl p-5 flex items-start gap-3 hover-lift h-full">
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-primary mt-0.5" />
+                <p className="text-sm md:text-base text-foreground/90">{q}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
-        <div className="glass-card rounded-2xl p-8 md:p-10 text-center relative overflow-hidden">
-          <div className="absolute inset-0 -z-10 opacity-40" style={{ background: "var(--gradient-hero)" }} />
-          <p className="text-xl md:text-2xl font-semibold max-w-3xl mx-auto leading-snug">
-            Eu posso ajudar a transformar esses problemas em soluções digitais{" "}
-            <span className="gradient-text">simples, eficientes e escaláveis</span>.
-          </p>
-        </div>
+        <Reveal direction="scale">
+          <div className="glass-card rounded-2xl p-8 md:p-10 text-center relative overflow-hidden">
+            <div className="absolute inset-0 -z-10 opacity-40" style={{ background: "var(--gradient-hero)" }} />
+            <p className="text-xl md:text-2xl font-semibold max-w-3xl mx-auto leading-snug">
+              Eu posso ajudar a transformar esses problemas em soluções digitais{" "}
+              <span className="gradient-text-animated">simples, eficientes e escaláveis</span>.
+            </p>
+          </div>
+        </Reveal>
       </Section>
 
       {/* PROCESSO */}
       <Section id="processo" eyebrow="Processo" title={<>Como eu <span className="gradient-text">trabalho</span></>}
         subtitle="Um fluxo direto, previsível e transparente — do primeiro papo até a entrega evolutiva.">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-          {process.map((p) => (
-            <div key={p.n} className="glass-card rounded-2xl p-6 relative">
-              <div className="font-mono text-3xl font-bold gradient-text mb-3">{p.n}</div>
-              <h3 className="font-semibold mb-2">{p.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-            </div>
+          {process.map((p, i) => (
+            <Reveal key={p.n} direction="up" delay={i * 100}>
+              <div className="glass-card rounded-2xl p-6 relative hover-lift h-full">
+                <div className="font-mono text-3xl font-bold gradient-text mb-3">{p.n}</div>
+                <h3 className="font-semibold mb-2">{p.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -425,14 +441,16 @@ export class OrdersController {
       {/* DIFERENCIAIS */}
       <Section id="diferenciais" eyebrow="Diferenciais" title={<>Por que trabalhar <span className="gradient-text">comigo</span></>}>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {differentials.map((d) => (
-            <div key={d.title} className="glass-card rounded-2xl p-6 hover:border-primary/60 transition-all">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-surface-elevated border border-border mb-4">
-                <d.icon className="h-5 w-5 text-primary" />
-              </span>
-              <h3 className="font-semibold mb-2">{d.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{d.desc}</p>
-            </div>
+          {differentials.map((d, i) => (
+            <Reveal key={d.title} direction="up" delay={i * 70}>
+              <div className="glass-card rounded-2xl p-6 group hover-lift hover:border-primary/60 h-full">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-surface-elevated border border-border mb-4 icon-pop">
+                  <d.icon className="h-5 w-5 text-primary" />
+                </span>
+                <h3 className="font-semibold mb-2">{d.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{d.desc}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -540,7 +558,7 @@ function Section({
   return (
     <section id={id} className="py-20 md:py-28 scroll-mt-20">
       <div className="section-container">
-        <div className="max-w-2xl mb-12">
+        <Reveal direction="up" className="max-w-2xl mb-12">
           <div className="font-mono text-xs uppercase tracking-widest text-primary mb-3">
             // {eyebrow}
           </div>
@@ -550,7 +568,7 @@ function Section({
           {subtitle && (
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">{subtitle}</p>
           )}
-        </div>
+        </Reveal>
         {children}
       </div>
     </section>
