@@ -1,11 +1,14 @@
 import { Github, GitBranch, Linkedin, Mail, MessageCircle, Terminal } from "lucide-react";
-import { buildWhatsAppUrl, mailtoUrl, profile, whatsappMessages } from "@/config/profile";
+import { buildWhatsAppUrl, gmailComposeUrl, profile, whatsappMessages } from "@/config/profile";
+
+const socialLinkClassName =
+  "inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface hover:border-primary hover:text-primary transition-colors";
 
 const socialLinks = [
   { href: profile.githubUrl, icon: Github, label: "GitHub" },
   { href: profile.linkedinUrl, icon: Linkedin, label: "LinkedIn" },
   { href: buildWhatsAppUrl(whatsappMessages.general), icon: MessageCircle, label: "WhatsApp" },
-  { href: mailtoUrl, icon: Mail, label: "E-mail" },
+  { href: gmailComposeUrl, icon: Mail, label: "E-mail" },
 ];
 
 export function Footer() {
@@ -34,7 +37,7 @@ export function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label={l.label}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface hover:border-primary hover:text-primary transition-colors"
+              className={socialLinkClassName}
             >
               <l.icon className="h-4 w-4" />
             </a>

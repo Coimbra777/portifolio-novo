@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail, MessageCircle, Sparkles } from "lucide-react";
-import { buildWhatsAppUrl, mailtoUrl, profile, whatsappMessages } from "@/config/profile";
+import { buildWhatsAppUrl, gmailComposeUrl, profile, whatsappMessages } from "@/config/profile";
 
 export function ContactSection() {
   return (
@@ -35,7 +35,9 @@ export function ContactSection() {
               <MessageCircle className="h-4 w-4" /> Solicitar orçamento no WhatsApp
             </a>
             <a
-              href={mailtoUrl}
+              href={gmailComposeUrl}
+              target="_blank"
+              rel="noreferrer"
               className="btn-outline inline-flex items-center gap-2 rounded-lg px-5 py-3 font-semibold"
             >
               <Mail className="h-4 w-4" /> Enviar e-mail

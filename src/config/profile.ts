@@ -38,4 +38,12 @@ export const whatsappMessages = {
     `Olá! Vi o case "${projectName}" no seu portfólio e gostaria de conversar sobre algo parecido.`,
 };
 
-export const mailtoUrl = `mailto:${profile.email}`;
+/** Monta a URL que abre o Gmail (compose) com destinatário/assunto pré-preenchidos. */
+export function buildGmailComposeUrl(subject?: string, body?: string): string {
+  const params = new URLSearchParams({ view: "cm", fs: "1", to: profile.email });
+  if (subject) params.set("su", subject);
+  if (body) params.set("body", body);
+  return `https://mail.google.com/mail/?${params.toString()}`;
+}
+
+export const gmailComposeUrl = buildGmailComposeUrl("Contato pelo portfólio");

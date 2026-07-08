@@ -4,12 +4,12 @@ Landing page pessoal de Gabriel Coimbra, desenvolvedor Backend/Fullstack com foc
 
 ## Stack utilizada
 
-- **[TanStack Start](https://tanstack.com/start)** (SSR/roteamento) + **React 19** + **TypeScript**
+- **[TanStack Start](https://tanstack.com/start)** (SSR/roteamento/server functions) + **React 19** + **TypeScript**
 - **Vite** como build tool
 - **Tailwind CSS v4** para estilização
 - **shadcn/ui** (Radix UI) como base de componentes de UI
 - **lucide-react** para ícones
-- **Nitro** como servidor/build de produção (preset Cloudflare)
+- **Nitro** (preset `node-server`) como servidor/build de produção — roda como um processo Node.js comum, compatível com o Railway
 
 ## Como instalar
 
@@ -35,7 +35,13 @@ A aplicação sobe em modo dev com hot reload (Vite).
 npm run build
 ```
 
-Para pré-visualizar o build gerado:
+Para rodar o build de produção localmente (mesmo comando usado em produção/Railway):
+
+```bash
+npm run start
+```
+
+Para pré-visualizar com o servidor de preview do Vite:
 
 ```bash
 npm run preview
@@ -75,8 +81,8 @@ src/
 │       ├── ProblemsSection.tsx
 │       ├── ProcessSection.tsx
 │       ├── DifferentialsSection.tsx
-│       ├── ContactSection.tsx
-│       ├── Footer.tsx
+│       ├── ContactSection.tsx # CTA "Enviar e-mail" abre o Gmail (compose) em nova aba
+│       ├── Footer.tsx         # Ícone de e-mail também abre o Gmail (compose)
 │       └── Section.tsx       # Wrapper genérico de seção (título/eyebrow/subtítulo)
 ├── routes/
 │   ├── __root.tsx             # Layout raiz, `<html>`, meta tags/SEO
@@ -95,7 +101,7 @@ src/
 7. **Como posso ajudar** — perguntas que endereçam dores comuns de negócio.
 8. **Processo** — etapas do fluxo de trabalho (diagnóstico → entrega).
 9. **Diferenciais** — motivos para contratar.
-10. **Contato** — CTAs de WhatsApp (com mensagem pré-preenchida), e-mail, LinkedIn e GitHub.
+10. **Contato** — CTA de WhatsApp (com mensagem pré-preenchida), CTA de "Enviar e-mail" que abre o Gmail (compose) já com o destinatário preenchido, além de LinkedIn e GitHub.
 11. **Footer** — marca, links sociais e informações de rodapé.
 
 ## Como personalizar
@@ -148,3 +154,29 @@ Se `githubUrl`/`demoUrl` estiverem vazios, os respectivos botões não são exib
 ### SEO
 
 Título, descrição e Open Graph ficam em `src/routes/__root.tsx`, dentro do `head()` da rota raiz.
+
+### Contato por e-mail
+
+O CTA "Enviar e-mail" (seção de contato e rodapé) abre o Gmail (compose) em uma nova aba, com o destinatário (`profile.email`) e um assunto padrão já preenchidos — o visitante escreve e envia pela própria conta dele, sem passar por nenhum servidor deste projeto. A URL é montada por `buildGmailComposeUrl`/`gmailComposeUrl` em `src/config/profile.ts`.
+
+## Deploy no Railway
+
+O projeto builda com Vite + Nitro (preset `node-server`, configurado em `vite.config.ts`), então o resultado do build (`.output/server/index.mjs`) roda como um processo Node.js comum — compatível com o runtime do Railway.
+
+Comandos usados no deploy (já configurados em `railway.json`):
+
+```bash
+npm run build   # gera .output/
+npm run start   # node .output/server/index.mjs
+```
+
+O servidor escuta na porta definida pela variável `PORT`, que o Railway injeta automaticamente (o preset `node-server` do Nitro já lê `process.env.PORT`) — nenhuma configuração extra é necessária para a porta.
+
+O projeto não depende de nenhuma variável de ambiente/secret para funcionar (o contato por e-mail usa um link direto para o Gmail, sem servidor de e-mail próprio), então nenhuma variável precisa ser cadastrada no Railway.
+
+### Checklist de deploy
+
+- [ ] `npm run build` roda sem erros localmente
+- [ ] `npm run start` sobe o servidor localmente a partir do build (`.output/server/index.mjs`)
+- [ ] `profile.ts` revisado com dados reais (WhatsApp, LinkedIn, GitHub, e-mail, localização)
+- [ ] `src/data/projects.ts` revisado com links reais de repositório/demo
