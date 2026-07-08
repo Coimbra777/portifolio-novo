@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { profile } from "../config/profile";
 
 function NotFoundComponent() {
   return (
@@ -77,20 +78,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gabriel Coimbra — Desenvolvedor Backend & Fullstack" },
+      { title: `${profile.name} — ${profile.role}` },
       {
         name: "description",
         content:
           "Desenvolvimento de APIs, sistemas web, integrações e automações para empresas que precisam ganhar eficiência. Node.js, NestJS, Laravel, Docker.",
       },
-      { name: "author", content: "Gabriel Coimbra" },
-      { property: "og:title", content: "Gabriel Coimbra — Desenvolvedor Backend & Fullstack" },
+      { name: "author", content: profile.name },
+      { property: "og:title", content: `${profile.name} — ${profile.role}` },
       {
         property: "og:description",
         content:
           "APIs, sistemas web, integrações e automações sob demanda. Backend, arquitetura e performance para empresas e startups.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -115,7 +117,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
