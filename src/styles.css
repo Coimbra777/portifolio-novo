@@ -32,6 +32,7 @@
   --color-ring: var(--ring);
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
+  --color-soft: var(--soft);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
@@ -39,6 +40,62 @@
 :root {
   --radius: 0.75rem;
 
+  /* Light, clean palette (indigo/fuchsia on off-white) */
+  --background: oklch(0.99 0.003 90);
+  --foreground: oklch(0.24 0.02 264);
+
+  --surface: oklch(0.97 0.006 264);
+  --surface-elevated: oklch(0.94 0.01 264);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.02 264);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.02 264);
+
+  --primary: oklch(0.53 0.22 291);       /* indigo */
+  --primary-glow: oklch(0.64 0.23 335);  /* fuchsia */
+  --primary-foreground: oklch(0.99 0.003 90);
+
+  --secondary: oklch(0.96 0.008 264);
+  --secondary-foreground: oklch(0.24 0.02 264);
+
+  --muted: oklch(0.96 0.008 264);
+  --muted-foreground: oklch(0.48 0.02 264);
+
+  --accent: oklch(0.64 0.23 335);
+  --accent-foreground: oklch(0.99 0.003 90);
+
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.9 0.008 264);
+  --input: oklch(0.9 0.008 264);
+  --ring: oklch(0.53 0.22 291);
+
+  --soft: oklch(0.95 0.035 291);
+  --soft-hover: oklch(0.92 0.045 291);
+  --selection: oklch(0.53 0.22 291 / 0.2);
+
+  --dot-purple: oklch(0.55 0.23 291);
+  --dot-coral: oklch(0.72 0.18 42);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.53 0.22 291), oklch(0.64 0.23 335));
+  --gradient-hero: radial-gradient(ellipse at top, oklch(0.53 0.22 291 / 0.08), transparent 60%),
+                   radial-gradient(ellipse at bottom right, oklch(0.64 0.23 335 / 0.06), transparent 60%);
+  --gradient-card: linear-gradient(180deg, oklch(1 0 0), oklch(1 0 0));
+  --body-bg: radial-gradient(circle at 20% 0%, oklch(0.53 0.22 291 / 0.05), transparent 50%),
+             radial-gradient(circle at 80% 100%, oklch(0.64 0.23 335 / 0.045), transparent 50%);
+
+  --card-blur: 0px;
+  --shadow-glow: 0 15px 40px -15px oklch(0.53 0.22 291 / 0.25);
+  --shadow-glow-hover: 0 20px 50px -15px oklch(0.53 0.22 291 / 0.35);
+  --shadow-elevated: 0 20px 50px -20px oklch(0.25 0.02 264 / 0.15);
+  --shadow-card: 0 4px 16px -4px oklch(0.25 0.02 264 / 0.08), 0 1px 2px oklch(0.25 0.02 264 / 0.06);
+
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark {
   /* Dark, tech-premium palette (cyan/violet on deep navy) */
   --background: oklch(0.16 0.02 260);
   --foreground: oklch(0.97 0.01 250);
@@ -71,16 +128,25 @@
   --input: oklch(0.3 0.03 262 / 0.8);
   --ring: oklch(0.78 0.16 205);
 
+  --soft: oklch(0.28 0.05 285 / 0.5);
+  --soft-hover: oklch(0.32 0.06 285 / 0.6);
+  --selection: oklch(0.78 0.16 205 / 0.35);
+
+  --dot-purple: oklch(0.7 0.2 285);
+  --dot-coral: oklch(0.72 0.16 55);
+
   --gradient-primary: linear-gradient(135deg, oklch(0.78 0.16 205), oklch(0.7 0.2 285));
   --gradient-hero: radial-gradient(ellipse at top, oklch(0.3 0.15 265 / 0.5), transparent 60%),
                    radial-gradient(ellipse at bottom right, oklch(0.35 0.18 205 / 0.35), transparent 60%);
   --gradient-card: linear-gradient(180deg, oklch(0.22 0.03 262 / 0.9), oklch(0.18 0.025 260 / 0.9));
+  --body-bg: radial-gradient(circle at 20% 0%, oklch(0.3 0.15 265 / 0.15), transparent 50%),
+             radial-gradient(circle at 80% 100%, oklch(0.3 0.18 205 / 0.12), transparent 50%);
 
+  --card-blur: 12px;
   --shadow-glow: 0 20px 60px -20px oklch(0.78 0.16 205 / 0.35);
+  --shadow-glow-hover: 0 25px 70px -20px oklch(0.78 0.16 205 / 0.5);
   --shadow-elevated: 0 20px 50px -20px oklch(0 0 0 / 0.6);
   --shadow-card: 0 10px 30px -12px oklch(0 0 0 / 0.5);
-
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer base {
@@ -97,14 +163,13 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    background-image:
-      radial-gradient(circle at 20% 0%, oklch(0.3 0.15 265 / 0.15), transparent 50%),
-      radial-gradient(circle at 80% 100%, oklch(0.3 0.18 205 / 0.12), transparent 50%);
+    background-image: var(--body-bg);
     background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
-    background: oklch(0.78 0.16 205 / 0.35);
+    background: var(--selection);
     color: var(--color-foreground);
   }
 }
@@ -118,7 +183,7 @@
 
 @utility glass-card {
   background: var(--gradient-card);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(var(--card-blur));
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-card);
 }
@@ -130,7 +195,7 @@
   transition: var(--transition-smooth);
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 25px 70px -20px oklch(0.78 0.16 205 / 0.5);
+    box-shadow: var(--shadow-glow-hover);
   }
 }
 
@@ -141,7 +206,17 @@
   transition: var(--transition-smooth);
   &:hover {
     border-color: var(--color-primary);
-    background: oklch(0.78 0.16 205 / 0.08);
+    background: var(--soft);
+  }
+}
+
+@utility btn-soft {
+  background: var(--soft);
+  color: var(--color-primary);
+  transition: var(--transition-smooth);
+  &:hover {
+    background: var(--soft-hover);
+    transform: translateY(-2px);
   }
 }
 
@@ -149,6 +224,43 @@
   max-width: 1200px;
   margin-inline: auto;
   padding-inline: 1.5rem;
+}
+
+@utility dot-accent {
+  position: absolute;
+  height: 1.75rem;
+  width: 1.75rem;
+  border-radius: 9999px;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 0 5px var(--color-card);
+  pointer-events: none;
+}
+
+@utility dot-coral {
+  position: absolute;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 9999px;
+  background: var(--dot-coral);
+  box-shadow: 0 0 0 5px var(--color-card);
+  pointer-events: none;
+}
+
+@utility timeline-line {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-primary), var(--accent));
+  opacity: 0.3;
+}
+
+@utility timeline-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--gradient-primary);
+  color: var(--color-primary-foreground);
+  box-shadow: 0 0 0 4px var(--color-background);
 }
 
 @keyframes float {
@@ -204,9 +316,9 @@
 
 @utility gradient-text-animated {
   background: linear-gradient(90deg,
-    oklch(0.78 0.16 205),
-    oklch(0.7 0.2 285),
-    oklch(0.78 0.16 205));
+    var(--primary),
+    var(--primary-glow),
+    var(--primary));
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;

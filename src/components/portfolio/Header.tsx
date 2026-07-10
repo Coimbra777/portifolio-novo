@@ -1,6 +1,7 @@
 import { ArrowRight, Terminal } from "lucide-react";
 import { nav } from "@/data/nav";
 import { profile } from "@/config/profile";
+import { ThemeToggle } from "@/components/portfolio/ThemeToggle";
 
 export function Header() {
   return (
@@ -26,13 +27,16 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <a
-          href="#contato"
-          className="btn-primary group hidden sm:inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold"
-        >
-          Orçamento{" "}
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <a
+            href="#contato"
+            className="btn-primary group hidden sm:inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold"
+          >
+            Orçamento{" "}
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
+        </div>
       </div>
     </header>
   );

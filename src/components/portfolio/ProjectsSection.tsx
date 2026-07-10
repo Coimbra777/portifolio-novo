@@ -1,4 +1,5 @@
 import {
+  ArrowUpRight,
   Bot,
   ExternalLink,
   FileSearch,
@@ -42,13 +43,22 @@ export function ProjectsSection() {
       }
       subtitle="Uma amostra dos tipos de sistema, integração e arquitetura que já desenvolvi."
     >
-      <div className="grid md:grid-cols-2 gap-5">
+      <div className="grid md:grid-cols-2 gap-6">
         {projects.map((p, i) => {
           const Icon = getProjectIcon(p);
           return (
             <Reveal key={p.name} direction={i % 2 === 0 ? "right" : "left"} delay={(i % 2) * 80}>
-              <article className="glass-card rounded-2xl p-7 flex flex-col group hover-lift shimmer-border hover:border-primary/60 h-full">
-                <div className="flex items-start gap-3 mb-1">
+              <article className="relative glass-card rounded-2xl p-7 flex flex-col group hover-lift h-full">
+                <span className="dot-accent -top-3 -right-3 hidden sm:block" />
+                <a
+                  href={p.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-soft absolute top-5 right-5 inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-semibold"
+                >
+                  Detalhes <ArrowUpRight className="h-3 w-3" />
+                </a>
+                <div className="flex items-start gap-3 mb-1 pr-20">
                   <span
                     className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg icon-pop"
                     style={{ background: "var(--gradient-primary)" }}
@@ -56,20 +66,20 @@ export function ProjectsSection() {
                     <Icon className="h-5 w-5 text-primary-foreground" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="text-lg font-semibold">{p.name}</h3>
+                    <h3 className="text-lg font-semibold">{p.name}</h3>
+                    <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                      <span className="inline-flex items-center rounded-full bg-soft px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-primary">
+                        {p.category}
+                      </span>
                       {p.status && (
-                        <span className="shrink-0 font-mono text-[10px] uppercase tracking-wide rounded-full border border-primary/40 text-primary px-2 py-0.5">
+                        <span className="inline-flex items-center rounded-full border border-border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
                           {p.status}
                         </span>
                       )}
                     </div>
-                    <p className="font-mono text-[11px] uppercase tracking-wide text-muted-foreground mt-0.5">
-                      {p.category}
-                    </p>
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground mt-3 mb-3">
+                <p className="text-xs text-muted-foreground mt-4 mb-3">
                   <span className="text-primary font-semibold">Problema: </span>
                   {p.problem}
                 </p>
@@ -92,13 +102,13 @@ export function ProjectsSection() {
                   {p.techs.map((t) => (
                     <span
                       key={t}
-                      className="font-mono text-[11px] rounded-md border border-border bg-surface px-2 py-0.5 text-muted-foreground"
+                      className="font-mono text-[11px] rounded-full border border-border bg-surface px-2.5 py-0.5 text-muted-foreground"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-                <div className="mt-auto flex flex-wrap gap-2">
+                <div className="mt-auto flex flex-wrap gap-2 pt-4 border-t border-border">
                   <a
                     href={p.githubUrl}
                     target="_blank"
@@ -106,14 +116,6 @@ export function ProjectsSection() {
                     className="btn-outline inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium"
                   >
                     <Github className="h-3 w-3" /> Ver repositório
-                  </a>
-                  <a
-                    href={buildWhatsAppUrl(whatsappMessages.project(p.name))}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn-outline group/btn inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium"
-                  >
-                    <MessageCircle className="h-3 w-3" /> Conversar sobre projeto parecido
                   </a>
                   {p.demoUrl && (
                     <a
@@ -125,6 +127,14 @@ export function ProjectsSection() {
                       <ExternalLink className="h-3 w-3" /> Ver demo
                     </a>
                   )}
+                  <a
+                    href={buildWhatsAppUrl(whatsappMessages.project(p.name))}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-soft group/btn inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium"
+                  >
+                    <MessageCircle className="h-3 w-3" /> Conversar sobre projeto parecido
+                  </a>
                 </div>
               </article>
             </Reveal>

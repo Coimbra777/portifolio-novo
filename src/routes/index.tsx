@@ -2,8 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/portfolio/Header";
 import { HeroSection } from "@/components/portfolio/HeroSection";
 import { AboutSection } from "@/components/portfolio/AboutSection";
+import { ExperienceSection } from "@/components/portfolio/ExperienceSection";
 import { ServicesSection } from "@/components/portfolio/ServicesSection";
 import { TechStackSection } from "@/components/portfolio/TechStackSection";
+// import { EducationSection } from "@/components/portfolio/EducationSection"; // seção desativada temporariamente
 import { ProjectsSection } from "@/components/portfolio/ProjectsSection";
 import { ProblemsSection } from "@/components/portfolio/ProblemsSection";
 import { ProcessSection } from "@/components/portfolio/ProcessSection";
@@ -21,8 +23,10 @@ function Portfolio() {
       <Header />
       <HeroSection />
       <AboutSection />
+      <ExperienceSection />
       <ServicesSection />
       <TechStackSection />
+      {/* <EducationSection /> — seção desativada temporariamente */}
       <ProjectsSection />
       <ProblemsSection />
       <ProcessSection />

@@ -68,6 +68,8 @@ export function HeroSection() {
 
         {/* Hero code card */}
         <div className="relative animate-fade-up" style={{ animationDelay: "150ms" }}>
+          <span className="dot-accent -top-3 -right-3" />
+          <span className="dot-coral -bottom-3 -left-3" />
           <div className="glass-card rounded-2xl p-6 relative overflow-hidden hover-tilt animate-float">
             <div
               className="pointer-events-none absolute inset-0 opacity-40"

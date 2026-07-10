@@ -15,6 +15,7 @@ export function AboutSection() {
     <Section
       id="sobre"
       eyebrow="Sobre mim"
+      align="left"
       title={
         <>
           Backend, integrações e <span className="gradient-text">resultado para o negócio</span>
