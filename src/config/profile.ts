@@ -1,25 +1,26 @@
 /**
  * Dados pessoais/profissionais centralizados do portfólio.
- *
- * Edite os campos marcados com TODO antes de publicar o site.
  */
 export const profile = {
   name: "Gabriel Coimbra",
-  role: "Desenvolvedor Backend & Fullstack",
-  shortRole: "Backend / Fullstack",
-  location: "Brasil", // TODO: preencher cidade/estado reais
+  role: "Engenheiro de Software · Backend",
+  shortRole: "Backend",
+  location: "Maranhão, Brasil",
   email: "gabrielfelipe.coimbra@gmail.com",
 
-  // TODO: substituir pelo número real em formato internacional (somente dígitos, com DDI + DDD).
-  // Exemplo: "5511999999999" para +55 11 99999-9999
+  // Formato internacional, somente dígitos (DDI + DDD + número).
   whatsappNumber: "5598970130666",
 
-  // TODO: substituir pelas URLs reais dos perfis.
   linkedinUrl: "https://www.linkedin.com/in/gcoimbraa/",
   githubUrl: "https://github.com/Coimbra777",
 
+  /** Ano do primeiro emprego na área — usado para calcular os anos de experiência. */
+  careerStartYear: 2022,
+  currentRole: "Engenheiro de Software",
+  currentCompany: "Getrak",
+
   summary:
-    "Desenvolvedor com foco em backend e soluções digitais orientadas a resultado. Atuo criando APIs, integrações entre sistemas e automações que ajudam empresas a reduzir trabalho operacional e escalar processos com tecnologia.",
+    "Engenheiro de Software com foco em backend e experiência full stack: APIs, microsserviços, integrações, mensageria e modernização de sistemas com Node.js, TypeScript e PHP.",
 
   logoLabel: "gabriel.dev",
 } as const;
@@ -46,3 +47,6 @@ export function buildGmailComposeUrl(subject?: string, body?: string): string {
 }
 
 export const gmailComposeUrl = buildGmailComposeUrl("Contato pelo portfólio");
+
+/** Anos de experiência profissional, contados a partir de `careerStartYear`. */
+export const yearsOfExperience = new Date().getFullYear() - profile.careerStartYear;

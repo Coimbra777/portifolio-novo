@@ -108,7 +108,7 @@ src/
 
 ### Dados pessoais e contato
 
-Edite **`src/config/profile.ts`**. Os campos marcados com `TODO` precisam ser preenchidos com informações reais antes de publicar o site:
+Edite **`src/config/profile.ts`**:
 
 | Campo | Descrição |
 | --- | --- |
@@ -119,7 +119,11 @@ Edite **`src/config/profile.ts`**. Os campos marcados com `TODO` precisam ser pr
 | `whatsappNumber` | Número do WhatsApp, formato internacional só com dígitos (ex.: `5511999999999`) |
 | `linkedinUrl` | URL do perfil no LinkedIn |
 | `githubUrl` | URL do perfil no GitHub |
-| `summary` | Resumo profissional usado na seção "Sobre" |
+| `careerStartYear` | Ano de início na área — calcula os "anos de experiência" exibidos no hero e no Sobre |
+| `currentRole` / `currentCompany` | Cargo e empresa atuais, citados no hero e no Sobre |
+| `summary` | Resumo profissional curto |
+
+A foto do hero fica em `public/gabriel.webp` (recorte com fundo transparente).
 
 As mensagens pré-preenchidas dos botões de WhatsApp ficam em `whatsappMessages` no mesmo arquivo.
 

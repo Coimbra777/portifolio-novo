@@ -16,16 +16,13 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
+        <h1 className="text-7xl text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
+          <Link to="/" className="btn-pill btn-yellow px-5 py-2 text-sm">
             Go home
           </Link>
         </div>
@@ -53,14 +50,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-pill btn-yellow px-5 py-2 text-sm"
           >
             Try again
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
+          <a href="/" className="btn-pill btn-ghost px-5 py-2 text-sm">
             Go home
           </a>
         </div>
@@ -78,14 +72,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Desenvolvimento de APIs, sistemas web, integrações e automações para empresas que precisam ganhar eficiência. Node.js, NestJS, Laravel, Docker.",
+          "Gabriel Coimbra, Engenheiro de Software com foco em backend. APIs, microsserviços, integrações e mensageria com Node.js, TypeScript, NestJS, PHP, Laravel, RabbitMQ, Docker e AWS.",
       },
       { name: "author", content: profile.name },
       { property: "og:title", content: `${profile.name} — ${profile.role}` },
       {
         property: "og:description",
         content:
-          "APIs, sistemas web, integrações e automações sob demanda. Backend, arquitetura e performance para empresas e startups.",
+          "Engenheiro de Software · Backend. APIs, microsserviços, integrações e mensageria com Node.js, TypeScript e PHP.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
@@ -101,7 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap",
       },
     ],
   }),

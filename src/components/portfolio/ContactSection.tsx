@@ -1,4 +1,6 @@
-import { Github, Linkedin, Mail, MessageCircle, Sparkles } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
+import { SectionBar, SectionDecor } from "@/components/portfolio/Section";
 import { buildWhatsAppUrl, gmailComposeUrl, profile, whatsappMessages } from "@/config/profile";
 
 const contactList = [
@@ -15,95 +17,70 @@ const contactList = [
 
 export function ContactSection() {
   return (
-    <section id="contato" className="py-24 relative overflow-hidden">
-      <div
-        className="absolute inset-0 -z-10 opacity-60"
-        style={{ background: "var(--gradient-hero)" }}
-      />
-      <div className="section-container">
-        <div className="max-w-2xl mx-auto text-center mb-12">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-soft px-3 py-1 text-xs font-medium text-primary mb-6">
-            <Sparkles className="h-3.5 w-3.5" /> Vamos conversar
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
-            Vamos transformar sua ideia ou processo em uma{" "}
-            <span className="gradient-text">solução digital?</span>
-          </h2>
-          <p className="mt-5 text-lg text-muted-foreground">
-            Entre em contato para conversar sobre seu projeto, entender suas necessidades e
-            encontrar a melhor solução técnica para o seu negócio.
-          </p>
-        </div>
-
-        <div className="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
-          <span className="dot-accent -top-3 -right-3 hidden sm:block" />
-          <span className="dot-coral -bottom-3 -left-3 hidden sm:block" />
-          <div className="grid md:grid-cols-2 gap-10 relative">
-            <div>
-              <h3 className="text-lg font-semibold mb-1">Fale comigo</h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                Escolha o canal que preferir — respondo rápido.
+    <section id="contato" className="relative overflow-hidden py-20 md:py-28 scroll-mt-16">
+      <SectionDecor number="11" />
+      <div className="section-container relative">
+        <SectionBar label="Contato" />
+        <Reveal direction="up">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-accent text-ink p-8 md:p-14 grid lg:grid-cols-[1.4fr_1fr] gap-12">
+            <span
+              aria-hidden
+              className="absolute -right-10 -top-16 size-64 rounded-full border-2 border-ink/25"
+            />
+            <div className="relative">
+              <h2 className="text-5xl md:text-7xl uppercase leading-[0.92]">
+                <span className="mr-2 align-top text-[0.7em] text-card">”</span>
+                Vamos trabalhar juntos<span className="text-card">.</span>
+              </h2>
+              <p className="mt-6 text-lg text-ink/80 max-w-xl leading-relaxed">
+                Vamos transformar sua ideia ou processo em uma solução digital? Entre em contato
+                para conversar sobre seu projeto e encontrar a melhor solução técnica para o seu
+                negócio.
               </p>
-              <ul className="space-y-4">
-                {contactList.map((c) => (
-                  <li key={c.label}>
-                    <a
-                      href={c.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-3 group"
-                    >
-                      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-soft text-primary">
-                        <c.icon className="h-4 w-4" />
-                      </span>
-                      <span>
-                        <span className="block text-xs text-muted-foreground">{c.label}</span>
-                        <span className="block text-sm font-medium group-hover:text-primary transition-colors">
-                          {c.value}
-                        </span>
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <a
+                  href={buildWhatsAppUrl(whatsappMessages.budget)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-pill group bg-ink text-white px-7 py-3.5"
+                >
+                  Solicitar orçamento <ArrowRight className="h-4 w-4 arrow-slide" />
+                </a>
+                <a
+                  href={gmailComposeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-pill border-2 border-ink px-7 py-3.5 hover:bg-ink hover:text-white"
+                >
+                  <Mail className="h-4 w-4" /> Enviar e-mail
+                </a>
+              </div>
             </div>
 
-            <div className="flex flex-col justify-center gap-3">
-              <a
-                href={buildWhatsAppUrl(whatsappMessages.budget)}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold"
-              >
-                <MessageCircle className="h-4 w-4" /> Solicitar orçamento no WhatsApp
-              </a>
-              <a
-                href={gmailComposeUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-outline inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold"
-              >
-                <Mail className="h-4 w-4" /> Enviar e-mail
-              </a>
-              <a
-                href={profile.linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-outline inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold"
-              >
-                <Linkedin className="h-4 w-4" /> LinkedIn
-              </a>
-              <a
-                href={profile.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-outline inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold"
-              >
-                <Github className="h-4 w-4" /> GitHub
-              </a>
-            </div>
+            <ul className="relative space-y-4 self-center">
+              {contactList.map((c) => (
+                <li key={c.label}>
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-center gap-4"
+                  >
+                    <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border-2 border-ink transition-colors group-hover:bg-ink group-hover:text-accent">
+                      <c.icon className="h-4 w-4" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-xs font-semibold uppercase tracking-wider text-ink/60">
+                        {c.label}
+                      </span>
+                      <span className="block truncate font-semibold">{c.value}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

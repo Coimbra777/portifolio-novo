@@ -6,32 +6,26 @@ export function ProcessSection() {
   return (
     <Section
       id="processo"
-      eyebrow="Processo"
-      title={
-        <>
-          Como eu <span className="gradient-text">trabalho</span>
-        </>
-      }
+      number="09"
+      label="Processo"
+      title="Processo"
       subtitle="Um fluxo direto, previsível e transparente — do primeiro papo até a entrega evolutiva."
     >
-      <div className="relative max-w-2xl mx-auto">
-        <span className="timeline-line left-5 top-2 bottom-2" />
-        <div className="space-y-8">
-          {processSteps.map((p, i) => (
-            <Reveal key={p.n} direction="up" delay={i * 100}>
-              <div className="relative flex items-start gap-5">
-                <span className="timeline-dot relative z-10 h-10 w-10 shrink-0 font-mono text-sm font-bold">
-                  {p.n}
-                </span>
-                <div className="glass-card rounded-2xl p-6 hover-lift flex-1">
-                  <h3 className="font-semibold mb-2">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
+      <ol className="relative grid sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
+        <span
+          aria-hidden
+          className="absolute left-6 right-6 top-6 hidden h-px bg-foreground/60 lg:block"
+        />
+        {processSteps.map((p, i) => (
+          <Reveal as="li" key={p.n} direction="up" delay={i * 70} className="relative">
+            <span className="relative inline-flex size-12 items-center justify-center rounded-full bg-accent font-display text-lg font-bold text-ink ring-8 ring-background">
+              {p.n}
+            </span>
+            <h3 className="mt-5 font-display text-xl font-bold">{p.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+          </Reveal>
+        ))}
+      </ol>
     </Section>
   );
 }

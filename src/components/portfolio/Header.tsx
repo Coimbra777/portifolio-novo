@@ -1,27 +1,33 @@
-import { ArrowRight, Terminal } from "lucide-react";
 import { nav } from "@/data/nav";
 import { profile } from "@/config/profile";
 import { ThemeToggle } from "@/components/portfolio/ThemeToggle";
 
+export function Logo() {
+  return (
+    <span aria-hidden className="relative inline-flex h-5 w-8">
+      <span className="absolute left-0 top-0 size-5 rounded-full bg-foreground" />
+      <span className="absolute left-3 top-0 size-5 rounded-full bg-accent" />
+    </span>
+  );
+}
+
 export function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur border-b border-foreground/70">
       <div className="section-container flex items-center justify-between h-16">
-        <a href="#top" className="flex items-center gap-2 font-mono font-bold text-lg">
-          <span
-            className="inline-flex h-8 w-8 items-center justify-center rounded-lg"
-            style={{ background: "var(--gradient-primary)" }}
-          >
-            <Terminal className="h-4 w-4 text-primary-foreground" />
-          </span>
-          <span className="gradient-text">{profile.logoLabel}</span>
+        <a
+          href="#top"
+          className="flex items-center gap-2.5 font-display text-lg font-bold whitespace-nowrap"
+        >
+          <Logo />
+          {profile.name}
         </a>
-        <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
+        <nav className="hidden xl:flex items-center gap-6 text-sm font-medium">
           {nav.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="relative hover:text-foreground transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100"
+              className="text-muted-foreground hover:text-foreground transition-colors underline-offset-8 decoration-2 decoration-accent hover:underline"
             >
               {n.label}
             </a>
@@ -31,10 +37,9 @@ export function Header() {
           <ThemeToggle />
           <a
             href="#contato"
-            className="btn-primary group hidden sm:inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold"
+            className="btn-pill btn-yellow hidden sm:inline-flex px-5 py-2 text-sm"
           >
-            Orçamento{" "}
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            Orçamento
           </a>
         </div>
       </div>

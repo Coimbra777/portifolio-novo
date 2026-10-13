@@ -1,74 +1,70 @@
-import { Briefcase, MapPin } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { Section } from "@/components/portfolio/Section";
-import { experience } from "@/data/experience";
+import { experience, type ExperienceItem } from "@/data/experience";
+
+function ExperienceEntry({ e }: { e: ExperienceItem }) {
+  return (
+    <div className="relative pl-7 pb-10 last:pb-0">
+      <span className="absolute -left-1.75 top-1.5 size-3 rounded-full bg-accent ring-4 ring-surface" />
+      <h3 className="font-display text-xl font-bold leading-tight">{e.role}</h3>
+      <p className="mt-1 text-sm font-semibold">
+        {e.companyUrl ? (
+          <a
+            href={e.companyUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-accent decoration-2 underline-offset-4"
+          >
+            {e.company}
+          </a>
+        ) : (
+          e.company
+        )}
+        <span className="font-normal text-muted-foreground"> · {e.location}</span>
+      </p>
+      <p className="mt-0.5 text-xs italic text-muted-foreground">{e.period}</p>
+      <ul className="mt-4 space-y-1.5">
+        {e.highlights.map((h) => (
+          <li key={h} className="flex items-start gap-2.5 text-sm text-foreground/85">
+            <span className="mt-2 h-1 w-3 shrink-0 rounded-full bg-accent" />
+            {h}
+          </li>
+        ))}
+      </ul>
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {e.stack.map((t) => (
+          <span key={t} className="chip">
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function ExperienceSection() {
+  const half = Math.ceil(experience.length / 2);
+  const columns = [experience.slice(0, half), experience.slice(half)];
+
   return (
     <Section
       id="experiencia"
-      eyebrow="Trajetória"
-      title={
-        <>
-          Experiência <span className="gradient-text">profissional</span>
-        </>
-      }
+      number="03"
+      label="Experiência"
+      title="Trajetória"
       subtitle="Uma trajetória construída entre backend, integrações e sistemas web para diferentes contextos e escalas."
+      className="bg-surface"
     >
-      <div className="relative max-w-3xl mx-auto">
-        <span className="timeline-line left-5 top-2 bottom-2" />
-        <div className="space-y-8">
-          {experience.map((e, i) => (
-            <Reveal key={`${e.company}-${e.period}`} direction="up" delay={i * 100}>
-              <div className="relative flex items-start gap-5">
-                <span className="timeline-dot relative z-10 h-10 w-10 shrink-0">
-                  <Briefcase className="h-4 w-4" />
-                </span>
-                <div className="relative glass-card rounded-2xl p-6 hover-lift flex-1">
-                  <span className="dot-accent -top-3 -right-3 hidden sm:block" />
-                  <div className="flex flex-wrap items-start justify-between gap-3 pr-8">
-                    <div>
-                      <h3 className="text-lg font-semibold">{e.role}</h3>
-                      <p className="text-sm font-medium text-primary mt-0.5">
-                        {e.companyUrl ? (
-                          <a href={e.companyUrl} target="_blank" rel="noreferrer" className="hover:underline">
-                            {e.company}
-                          </a>
-                        ) : (
-                          e.company
-                        )}
-                      </p>
-                    </div>
-                    <span className="inline-flex items-center rounded-full bg-soft px-3 py-1 font-mono text-[11px] uppercase tracking-wide text-primary">
-                      {e.period}
-                    </span>
-                  </div>
-                  <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <MapPin className="h-3.5 w-3.5" /> {e.location}
-                  </p>
-                  <ul className="mt-4 space-y-1.5">
-                    {e.highlights.map((h) => (
-                      <li key={h} className="text-sm text-foreground/80 flex items-start gap-2">
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-border">
-                    {e.stack.map((t) => (
-                      <span
-                        key={t}
-                        className="font-mono text-[11px] rounded-full border border-border bg-surface px-2.5 py-0.5 text-muted-foreground"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
+        {columns.map((col, ci) => (
+          <Reveal key={ci} direction="up" delay={ci * 100}>
+            <div className="border-l-2 border-foreground/80">
+              {col.map((e) => (
+                <ExperienceEntry key={`${e.company}-${e.period}`} e={e} />
+              ))}
+            </div>
+          </Reveal>
+        ))}
       </div>
     </Section>
   );
