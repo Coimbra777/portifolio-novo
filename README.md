@@ -178,6 +178,24 @@ Título, descrição e Open Graph ficam em `src/routes/__root.tsx`, dentro do `h
 
 O CTA "Enviar e-mail" (seção de contato e rodapé) abre o Gmail (compose) em uma nova aba, com o destinatário (`profile.email`) e um assunto padrão já preenchidos — o visitante escreve e envia pela própria conta dele, sem passar por nenhum servidor deste projeto. A URL é montada por `buildGmailComposeUrl`/`gmailComposeUrl` em `src/config/profile.ts`.
 
+## Deploy gratuito (site estático)
+
+O site não depende de servidor: `npm run build:static` gera o build e depois pré-renderiza a página em HTML (`scripts/prerender.mjs`). A pasta **`.output/public`** fica pronta para qualquer hospedagem estática gratuita.
+
+```bash
+npm run build:static   # gera .output/public com index.html + assets
+```
+
+| Provedor | Como configurar |
+| --- | --- |
+| **Cloudflare Pages** (recomendado — banda ilimitada no plano grátis) | Workers & Pages → Create → Pages → conectar o repositório. Build command: `npm run build:static` · Output directory: `.output/public`. A versão do Node vem do `.nvmrc`. |
+| **Vercel** | Importar o repositório. As configurações já estão em `vercel.json`. |
+| **Netlify** | Importar o repositório. As configurações já estão em `netlify.toml`. |
+
+Em todos eles, cada push na branch de produção (normalmente `main`) gera um novo deploy, e cada pull request ganha uma URL de preview.
+
+> GitHub Pages também funciona, mas só com domínio próprio ou no repositório `<usuario>.github.io`: os assets são referenciados a partir da raiz (`/assets/...`), o que quebra em subcaminhos como `<usuario>.github.io/portifolio-novo/`.
+
 ## Deploy no Railway
 
 O projeto builda com Vite + Nitro (preset `node-server`, configurado em `vite.config.ts`), então o resultado do build (`.output/server/index.mjs`) roda como um processo Node.js comum — compatível com o runtime do Railway.

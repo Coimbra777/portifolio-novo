@@ -22,6 +22,9 @@ export const profile = {
   summary:
     "Engenheiro de Software com foco em backend e experiência full stack: APIs, microsserviços, integrações, mensageria e modernização de sistemas com Node.js, TypeScript e PHP.",
 
+  /** Domínio público do site — usado em URL canônica e Open Graph. */
+  siteUrl: "https://gcoimbra.dev.br",
+
   logoLabel: "gabriel.dev",
 } as const;
 

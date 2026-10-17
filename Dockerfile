@@ -18,7 +18,10 @@ FROM node:22-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 
-COPY --from=build /app/.output ./.output
+COPY --from=build --chown=node:node /app/.output ./.output
+
+# Roda sem privilégios de root (usuário "node" já existe na imagem oficial).
+USER node
 
 # Railway injects PORT at runtime; Nitro's node-server preset reads it
 # automatically (defaults to 3000 if unset).

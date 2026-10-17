@@ -1,0 +1,12 @@
+# Abre PRs semanais com atualizações de dependências (inclui correções de
+# segurança), agrupadas para não gerar um PR por pacote.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      dependencias:
+        patterns: ["*"]
+    open-pull-requests-limit: 5
