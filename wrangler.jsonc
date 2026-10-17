@@ -1,0 +1,12 @@
+// Deploy no Cloudflare Workers como site estático (sem código de servidor).
+// O build (npm run build:static) gera .output/public; o Cloudflare só publica
+// essa pasta. Os cabeçalhos de segurança vêm de public/_headers.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portifolios",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": ".output/public",
+    "not_found_handling": "single-page-application"
+  }
+}

@@ -19,7 +19,7 @@ Pré-requisito: Node.js 20+ (o `package.json` pede `>=22.12.0` para o TanStack S
 npm install
 ```
 
-> O projeto também possui `bun.lock`. Se preferir usar [Bun](https://bun.sh), rode `bun install` no lugar de `npm install`.
+> O projeto usa **npm** (`package-lock.json`). Use Node 22 (`nvm use` lê o `.nvmrc`).
 
 ## Como rodar em desenvolvimento
 
@@ -188,7 +188,7 @@ npm run build:static   # gera .output/public com index.html + assets
 
 | Provedor | Como configurar |
 | --- | --- |
-| **Cloudflare Pages** (recomendado — banda ilimitada no plano grátis) | Workers & Pages → Create → Pages → conectar o repositório. Build command: `npm run build:static` · Output directory: `.output/public`. A versão do Node vem do `.nvmrc`. |
+| **Cloudflare Workers** (recomendado — usado em produção em gcoimbra.dev.br) | Workers & Pages → Create → Import a repository. Build command: `npm run build:static` · Deploy command: `npx wrangler deploy`. A pasta publicada vem do `wrangler.jsonc`; a versão do Node, do `.nvmrc`. |
 | **Vercel** | Importar o repositório. As configurações já estão em `vercel.json`. |
 | **Netlify** | Importar o repositório. As configurações já estão em `netlify.toml`. |
 
