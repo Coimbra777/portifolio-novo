@@ -15,6 +15,8 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
 const ROUTES = ["/"];
+// Rota inexistente usada para gerar a página 404 estática (404.html).
+const NOT_FOUND_PROBE = "/__pagina-inexistente__";
 const PORT = 4321;
 const OUT_DIR = ".output/public";
 
@@ -76,6 +78,13 @@ try {
     await writeFile(file, html);
     console.log(`[prerender] ${route} -> ${file}`);
   }
+
+  const notFound = await fetch(`http://localhost:${PORT}${NOT_FOUND_PROBE}`);
+  if (notFound.status !== 404) {
+    throw new Error(`Esperava 404 em ${NOT_FOUND_PROBE}, recebi ${notFound.status}`);
+  }
+  await writeFile(join(OUT_DIR, "404.html"), injectCsp(await notFound.text()));
+  console.log(`[prerender] 404 -> ${join(OUT_DIR, "404.html")}`);
 } finally {
   server.kill();
 }
