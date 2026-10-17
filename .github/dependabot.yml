@@ -1,5 +1,8 @@
-# Abre PRs semanais com atualizações de dependências (inclui correções de
-# segurança), agrupadas para não gerar um PR por pacote.
+# Abre um PR semanal com atualizações minor/patch das dependências, agrupadas.
+# Versões major (ex.: TypeScript 5 -> 7) ficam de fora: costumam quebrar o
+# build e devem ser atualizadas manualmente, uma de cada vez.
+# Alertas de segurança continuam chegando pelo "Dependabot security updates"
+# (Settings -> Code security), independente desta configuração.
 version: 2
 updates:
   - package-ecosystem: npm
@@ -7,6 +10,10 @@ updates:
     schedule:
       interval: weekly
     groups:
-      dependencias:
+      minor-e-patch:
         patterns: ["*"]
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     open-pull-requests-limit: 5
